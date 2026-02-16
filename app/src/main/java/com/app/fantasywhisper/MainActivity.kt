@@ -1,4 +1,4 @@
-package com.example.fantasywhisper
+package com.app.fantasywhisper
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -24,9 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
-import com.example.fantasywhisper.ui.theme.FantasyWhisperTheme
-import com.example.fantasywhisper.ui.screens.ContentScreen
-import com.example.fantasywhisper.ui.screens.WhisperChooseScreen
+import com.app.fantasywhisper.ui.theme.FantasyWhisperTheme
+import com.app.fantasywhisper.ui.screens.ContentScreen
+import com.app.fantasywhisper.ui.screens.WhisperChooseScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

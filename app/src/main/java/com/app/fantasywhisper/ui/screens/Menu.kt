@@ -1,4 +1,4 @@
-package com.example.fantasywhisper.ui.screens
+package com.app.fantasywhisper.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
@@ -26,13 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.layout.offset
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
-import com.example.fantasywhisper.AppDestinations
-import com.example.fantasywhisper.ui.components.AppMenuButton
-import com.example.fantasywhisper.ui.components.BulletText
-import com.example.fantasywhisper.ui.components.NumText
+import com.app.fantasywhisper.AppDestinations
+import com.app.fantasywhisper.ui.components.AppMenuButton
+import com.app.fantasywhisper.ui.components.BulletText
+import com.app.fantasywhisper.ui.components.NumText
 
 
 @Composable
@@ -65,6 +65,7 @@ fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.primary)
                 .padding(padding)
+                .offset(x=0.dp,y=20.dp)
         ) {
             Box(
                 modifier = Modifier
@@ -72,14 +73,6 @@ fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                     .background(
                         color = MaterialTheme.colorScheme.secondary,
                         shape = RoundedCornerShape(16.dp)
-                    )
-                    .clip(
-                        RoundedCornerShape(
-                            topStart = 16.dp,
-                            topEnd = 16.dp,
-                            bottomStart = 0.dp,
-                            bottomEnd = 0.dp
-                        )
                     )
                     .padding(8.dp)
 
@@ -152,6 +145,7 @@ fun DisclaimerBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.primary)
                 .padding(padding)
+                .offset(x=0.dp,y=20.dp)
         ) {
             Box(
                 modifier = Modifier

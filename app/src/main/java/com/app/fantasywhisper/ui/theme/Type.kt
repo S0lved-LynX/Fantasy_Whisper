@@ -1,4 +1,4 @@
-package com.example.fantasywhisper.ui.theme
+package com.app.fantasywhisper.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

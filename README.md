@@ -38,10 +38,9 @@ I'm not really a god so please be aware that **I can make a coding mistake** tha
 
 ### Feedback
 - more people not only partners can use it
-- home outline ui
 - prevent accidental exit
 - store results
 - add more
 - CZ
 - cli
-- custom sady
+- custom sets

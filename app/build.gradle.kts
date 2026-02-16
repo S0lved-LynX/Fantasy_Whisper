@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.fantasywhisper"
+    namespace = "com.app.fantasywhisper"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.fantasywhisper"
+        applicationId = "com.app.fantasywhisper"
         minSdk = 28
         targetSdk = 36
         versionCode = 1

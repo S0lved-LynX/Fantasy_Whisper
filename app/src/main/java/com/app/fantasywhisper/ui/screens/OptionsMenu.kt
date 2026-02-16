@@ -1,4 +1,4 @@
-package com.example.fantasywhisper.ui.screens
+package com.app.fantasywhisper.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,8 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
-//import com.example.fantasywhisper.ui.theme.Blood
-import com.example.fantasywhisper.ui.theme.White
+//import com.app.fantasywhisper.ui.theme.Blood
+import com.app.fantasywhisper.ui.theme.White
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
@@ -32,12 +32,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.example.fantasywhisper.ui.components.ResultItem
-import com.example.fantasywhisper.ui.components.WhisperOptionsButton
-import com.example.fantasywhisper.ui.data.cosplayItems
-import com.example.fantasywhisper.ui.data.kinkItems
-import com.example.fantasywhisper.ui.data.placesItems
-import com.example.fantasywhisper.ui.data.roleplayItems
+import com.app.fantasywhisper.ui.components.ResultItem
+import com.app.fantasywhisper.ui.components.WhisperOptionsButton
+import com.app.fantasywhisper.ui.data.cosplayItems
+import com.app.fantasywhisper.ui.data.kinkItems
+import com.app.fantasywhisper.ui.data.placesItems
+import com.app.fantasywhisper.ui.data.roleplayItems
 
 @Composable
 fun WhisperChooseScreen(onBack: () -> Unit) {

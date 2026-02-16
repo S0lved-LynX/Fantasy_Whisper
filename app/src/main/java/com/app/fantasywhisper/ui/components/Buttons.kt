@@ -1,4 +1,4 @@
-package com.example.fantasywhisper.ui.components
+package com.app.fantasywhisper.ui.components
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.fantasywhisper.ui.theme.Rose
+import com.app.fantasywhisper.ui.theme.Rose
 
 @Composable
 fun AppMenuButton(
@@ -50,6 +50,6 @@ fun WhisperOptionsButton(label: String, modifier: Modifier = Modifier, onClick: 
         ),
         modifier = modifier.height(96.dp)
     ) {
-        Text(label, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+        Text(label, fontSize = 24.sp, fontWeight = FontWeight.Bold)
     }
 }

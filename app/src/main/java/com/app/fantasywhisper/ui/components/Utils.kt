@@ -1,4 +1,4 @@
-package com.example.fantasywhisper.ui.components
+package com.app.fantasywhisper.ui.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
@@ -27,8 +27,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.fantasywhisper.ui.theme.Crow
-import com.example.fantasywhisper.ui.theme.White
+import com.app.fantasywhisper.ui.theme.Crow
+import com.app.fantasywhisper.ui.theme.White
 
 @Composable
 fun BulletText(text: String) {

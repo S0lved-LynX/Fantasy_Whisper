@@ -1,4 +1,4 @@
-package com.example.fantasywhisper.ui.screens
+package com.app.fantasywhisper.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,12 +12,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.fantasywhisper.ui.theme.White
-import com.example.fantasywhisper.ui.data.cosplayItems
-import com.example.fantasywhisper.ui.data.kinkItems
-import com.example.fantasywhisper.ui.data.placesItems
-import com.example.fantasywhisper.ui.data.roleplayItems
-import com.example.fantasywhisper.ui.components.ListItem
+import com.app.fantasywhisper.ui.theme.White
+import com.app.fantasywhisper.ui.data.cosplayItems
+import com.app.fantasywhisper.ui.data.kinkItems
+import com.app.fantasywhisper.ui.data.placesItems
+import com.app.fantasywhisper.ui.data.roleplayItems
+import com.app.fantasywhisper.ui.components.ListItem
 
 @Composable
 fun KinkListCaller(listType: WList, onEnd: () -> Unit) {
