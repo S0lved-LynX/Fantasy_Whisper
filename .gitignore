@@ -1,0 +1,28 @@
+/local.properties
+.idea/
+.kotlin/
+.DS_Store
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Log files
+*.log
+
+# Mac/Windows system files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Build artifacts
+bin/
+gen/
+out/
+build/
+.gradle/
