@@ -57,10 +57,10 @@ fun ListItem (
     text: String,
     description: String,
     isChecked: Boolean,
-    checkChange: (Boolean) -> Unit
+    isExpanded: Boolean,
+    checkChange: (Boolean) -> Unit,
+    expandChange: (Boolean) -> Unit
 ) {
-    var isExpanded by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -74,7 +74,7 @@ fun ListItem (
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clickable { isExpanded = !isExpanded },
+                .clickable { expandChange(!isExpanded) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Checkbox(

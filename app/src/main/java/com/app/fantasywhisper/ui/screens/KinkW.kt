@@ -61,6 +61,10 @@ fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArr
         addAll(List(sourceList.size) {false})
     }}
 
+    var expandedList = remember {mutableStateListOf<Boolean>().apply {
+        addAll(List(sourceList.size) {false})
+    }}
+
     Scaffold (
         contentColor = MaterialTheme.colorScheme.tertiary
     ){ padding ->
@@ -86,13 +90,18 @@ fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArr
                     val title = data.name
                     val description = data.description
                     val checked = checkedList[index]
+                    val expanded = expandedList[index]
 
                     ListItem(
                         title,
                         description,
                         checked,
+                        expanded,
                         checkChange = { newValue ->
                             checkedList[index] = newValue
+                        },
+                        expandChange = { newValue ->
+                            expandedList[index] = newValue
                         }
                     )
                 }

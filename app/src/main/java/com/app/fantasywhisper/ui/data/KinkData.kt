@@ -174,8 +174,6 @@ val kinkItems = listOf(
     ListData("Nasolingus", "A fetish for sucking on someone’s nose. "),
     ListData("Nasophilia", "Fetish for noses. "),
     ListData("Needle play", "Playing with needles can involve breaking the skin and temporary piercing. Needles can also be used to scratch. "),
-    ListData("Nullification", "A kink for removing any body part. This is very dangerous. "),
-    ListData("Nullo", "An extreme kink for the removal of genitals. In practice, nullo is very dangerous and can even be fatal. "),
     ListData("Nyctophilia", "Fetish for the night that can also refer to fetishizing darkness. Scotophilia has the same meaning. "),
 // O
     ListData("Objectophilia (Objectum Sexuality)", "Also known as fetishism. This refers specifically to arousal by and sexual activity with an inanimate object, such as shoes. "),
