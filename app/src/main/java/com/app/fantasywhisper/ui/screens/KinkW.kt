@@ -1,5 +1,6 @@
 package com.app.fantasywhisper.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.layout.*
@@ -32,6 +33,7 @@ fun KinkListCaller(listType: WList, onEnd: () -> Unit) {
 
     var resultList = remember { mutableStateOf(BooleanArray(sourceList.size) {true})}
 
+    BackHandler(enabled = true) { }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -40,15 +42,15 @@ fun KinkListCaller(listType: WList, onEnd: () -> Unit) {
             )
     ) {
         when (state) {
-            0 -> KinkListScreen(listType,"Proceed to next member",resultList, state) {state++}
-            1 -> KinkListScreen(listType,"See results",resultList, state) {state++}
+            0 -> KinkListScreen(listType,"Proceed to next member",resultList) {state++}
+            1 -> KinkListScreen(listType,"See results",resultList) {state++}
             else -> ResultScreen(listType,resultList, onEnd)
         }
     }
 }
 
 @Composable
-fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArray>, state: Int, onNext: () -> Unit) {
+fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArray>, onNext: () -> Unit) {
 
     val sourceList = when (source) {
         WList.ROLEPLAY -> roleplayItems

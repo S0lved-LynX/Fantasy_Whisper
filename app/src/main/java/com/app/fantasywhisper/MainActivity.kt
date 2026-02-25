@@ -1,6 +1,7 @@
 package com.app.fantasywhisper
 
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -44,8 +45,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun FantasyWhisperApp() {
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
-
     val showBottom = currentDestination != AppDestinations.LIST
+
+    BackHandler(enabled = currentDestination == AppDestinations.DISCLAIMER) {
+        currentDestination = AppDestinations.HOME
+    }
+
+    BackHandler(enabled = currentDestination == AppDestinations.HOME) {/*nothing*/}
 
     if (showBottom) {
         NavigationSuiteScaffold(
@@ -75,6 +81,7 @@ fun FantasyWhisperApp() {
                             selected = isSelected,
                             onClick = { currentDestination = it }
                         )
+
                     }
             }
         ) {
