@@ -195,7 +195,7 @@ fun DisclaimerBox(modifier: Modifier, onStartWhisper: () -> Unit) {
 
                     Text("Feedback: I welcome suggestions for updates and new features.", color = Color.White.copy(alpha = 0.9f))
                     Text("Liability: This software is provided for communication purposes only. The developer assumes no liability for any injury, loss, or damage resulting from the use of this app.", color = Color.White.copy(alpha = 0.9f))
-                    
+
                     ListLink()
                     Text("The app idea was revealed to me in a dream.", color = MaterialTheme.colorScheme.tertiary)
                 }
