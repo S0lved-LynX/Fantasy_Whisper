@@ -2,12 +2,14 @@ package com.app.fantasywhisper.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.ui.text.SpanStyle
@@ -27,12 +29,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
 import com.app.fantasywhisper.AppDestinations
 import com.app.fantasywhisper.ui.components.AppMenuButton
 import com.app.fantasywhisper.ui.components.BulletText
+import com.app.fantasywhisper.ui.components.EmptyResult
 import com.app.fantasywhisper.ui.components.NumText
+import com.app.fantasywhisper.ui.components.ResultItem
+import com.app.fantasywhisper.ui.components.TitleText
+import com.app.fantasywhisper.ui.data.cosplayItems
+import com.app.fantasywhisper.ui.data.kinkItems
+import com.app.fantasywhisper.ui.data.placesItems
+import com.app.fantasywhisper.ui.data.roleplayItems
+import com.app.fantasywhisper.ui.theme.White
 
 
 @Composable
@@ -96,15 +112,7 @@ fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                         )
                         .padding(6.dp)
                 ) {
-                    Text(
-                        text = "Welcome",
-                        style = MaterialTheme.typography.headlineMedium.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        textAlign = TextAlign.Center,
-                        color = Color.White,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    TitleText("Welcome")
 
                     Spacer(Modifier.height(16.dp))
 
@@ -176,15 +184,7 @@ fun DisclaimerBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                         )
                         .padding(6.dp)
                 ) {
-                    Text(
-                        text = "Disclaimer 18+",
-                        style = MaterialTheme.typography.headlineMedium.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        textAlign = TextAlign.Center,
-                        color = Color.White,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    TitleText("Disclaimer")
 
                     Text(
                         text = "First of all this is my first app so please be patient with me - there might be bugs."
@@ -234,6 +234,94 @@ fun DisclaimerBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                     Text("I'm not liable for any damage, hurt or death - this software is used only for communication, if you hurt yourself or others then it's your fault, you were warned and should've been careful.",color = Color.White.copy(alpha = 0.9f))
 
                     Text("The app idea was revealed to me in my dream.", color = MaterialTheme.colorScheme.tertiary)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisper: () -> Unit) {
+    val sourceList = when (listType) {
+        WList.ROLEPLAY -> roleplayItems
+        WList.COSPLAY -> cosplayItems
+        WList.PLACES -> placesItems
+        WList.KINKS -> kinkItems
+    }
+    val result = number.value
+    var indexes = remember {mutableStateListOf<Int>()}
+
+    for (i in result.indices) {
+        if (result[i]) {
+            indexes.add(i)
+        }
+    }
+
+    var expandedList = remember {mutableStateListOf<Boolean>().apply {
+        addAll(List(indexes.size) {false})
+    }}
+
+    if (indexes.isEmpty()) {
+        // nothing in common
+        EmptyResult(onEndWhisper)
+    } else {
+        // some common items found
+        Scaffold { padding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.tertiary)
+                    .padding(padding)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            color = MaterialTheme.colorScheme.tertiary
+                        )
+                        .padding(6.dp)
+                ) {
+                    TitleText("Results")
+
+                    Text(
+                        text = "You both want to try or have in common:",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = Color.White.copy(alpha = 0.9f)
+                    )
+
+
+                    LazyColumn(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        items(indexes.size) { index ->
+                            val data = sourceList[indexes[index]]
+                            val title = data.name
+                            val description = data.description
+                            val isExpanded = expandedList[index]
+
+                            ResultItem(
+                                title,
+                                description,
+                                isExpanded,
+                                expandChange = { newValue ->
+                                    expandedList[index] = newValue
+                                }
+                            )
+                        }
+                    }
+
+
+                    Button(
+                        onClick = onEndWhisper,
+                        modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(
+                            MaterialTheme.colorScheme.surface,
+                            White
+                        )
+                    ) {
+                        Text("End Whisper")
+                    }
                 }
             }
         }

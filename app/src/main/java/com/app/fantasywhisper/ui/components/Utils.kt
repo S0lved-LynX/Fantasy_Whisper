@@ -113,10 +113,10 @@ fun ListItem (
 @Composable
 fun ResultItem (
     text: String,
-    description: String
+    description: String,
+    isExpanded: Boolean,
+    expandChange: (Boolean) -> Unit
 ) {
-    var isExpanded by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -129,7 +129,7 @@ fun ResultItem (
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .clickable { isExpanded = !isExpanded },
+                .clickable { expandChange(!isExpanded) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(

@@ -19,6 +19,7 @@ import com.app.fantasywhisper.ui.data.kinkItems
 import com.app.fantasywhisper.ui.data.placesItems
 import com.app.fantasywhisper.ui.data.roleplayItems
 import com.app.fantasywhisper.ui.components.ListItem
+import com.app.fantasywhisper.ui.components.TitleText
 
 @Composable
 fun KinkListCaller(listType: WList, onEnd: () -> Unit) {
@@ -76,12 +77,7 @@ fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArr
                 .background(MaterialTheme.colorScheme.tertiary),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.headlineLarge,
-                color = White,
-                text = "Select boxes"
-            )
+            TitleText("Select boxes")
             // List
             LazyColumn(
                 modifier = Modifier.weight(1f),
