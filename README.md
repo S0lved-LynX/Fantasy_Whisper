@@ -1,46 +1,47 @@
 # Fantasy Whisper
 
-This app is made for shy people that feel too embarrased to ask their partner if they want to fulfill their fantasies. 
+This app is made for shy people that feel too shy or embarrased to ask their partner to fulfill their fantasies. 
 
 ## Installation
 
-You have 2 options for installation. 
+You have 2 installation options: 
 
-1. Download the included compiled apk and install it from local storage. Android will probably inform that you need to enable downloading from local storage. After installation **I suggest you to turn it off for your safety**.
-2. If you have Android Studio and are experienced with Android programming you can clone the github repository and compile code for yourself.
+1. Download the included compiled apk and install it from local storage. Android will warn you that you need to enable downloading from local storage. After installation **I suggest you to turn it back off for your safety**.
+2. If you have Android Studio and you are experienced with Android programming you can clone the github repository and compile code for yourself.
 
 ## Usage 
 
 > TODO: Update for multiple people
 
-After starting the app you can decide which type of fantasies you want to share with your partner/friend or whoever you are with. There are few categories you can choose from:
+After starting the app you can decide which type of fantasies you want to share with your partner/friend or whoever you are with at the moment. There are a few categories that you can choose from:
 
 1. Kinks
 2. Places
 3. Roleplay
+4. Cosplay
+5. Custom
 
-Then one of you fills his fantasies into form and clicks **Confirm**. The screen will change for the second participant to fill the needs and **Confirm**. Then when you both want to see you proceed to the result which will show items that were chosen by both. After clicking **End** results will be securely deleted and form needs to be filled again if you want to see the result again. 
+Then one of you fills in his fantasies into the form and clicks **Proceed to next member**. The screen will change for the second participant to fill in the needs and then the participant clicks **See results**. Then both users will be able to see items (kinks) that they have in common. After clicking **End whisper** results will be securely deleted and the form needs to be filled in again. 
 
-There is also a second mode where one partner shares fantasy that will be done against the second partner and the second will share what is wanted to be done to self.
-
-There is also a quick menu with short description about kinks.
+When choosing items the user can click the box to see short description.
 
 ## Promises
 
-This app wasn't made for ads or some ducking data collection, you can go through the code yourself and even submit it to some AI to show that it doesn't collect or share any data. It was also created with privacy in mind so it will enforce the best practices.
+This app wasn't made for making money -> this means that there aren't any ads or some ducking data collection, you can go through the code yourselves and even submit it to some AI to find out that it doesn't collect or share any data. It was also created with privacy in mind so it will try to enforce the best coding and security practices.
 
 ## Disclaimer
 
-> **BIG DISCLAIMER**: this app shouldn't contain any illegal kinks (please be aware that vore can be roleplayed and not really performed). Also if the thing you want to do is legal in your country - I don't care I won't implement the big three of absolutely disgusting things. **Also** ***CONSENT*** exist, please be aware of that and **DON'T** force anybody into anything.
+> **BIG DISCLAIMER**: the lists were strapped from some kinks because I decided they are too illegal/disgusting/dangerous. But there are still some really dangerous that I left out so be really careful when you decide to try them. Also there may be some changes in law in other countries so be careful about that. **Also** ***CONSENT*** exist, please be aware of that and **DON'T** force anybody into anything they don't want to do.
 
-I'm not really a god so please be aware that **I can make a coding mistake** that will make the app insecure. Also I'm not a native English speaker so if anything sounds like it was written by some first grader then yeah it was ;).
+And please be aware that **I can make a coding mistake** that will make the app insecure. Also I'm not a native English speaker so if anything sounds like it was written by some first grader then yeah it was kinda ;).
 
 
-### Feedback
+### Feedback from first release
+- secure it with rate of filled in list
 - more people not only partners can use it
-- prevent accidental exit
 - store results
 - add more
 - CZ
 - cli
 - custom sets
+- search bar

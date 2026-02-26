@@ -9,14 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.text.ClickableText
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.foundation.rememberScrollState
@@ -35,12 +28,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.style.TextAlign
 import com.app.fantasywhisper.AppDestinations
 import com.app.fantasywhisper.ui.components.AppMenuButton
 import com.app.fantasywhisper.ui.components.BulletText
 import com.app.fantasywhisper.ui.components.EmptyResult
+import com.app.fantasywhisper.ui.components.ListLink
 import com.app.fantasywhisper.ui.components.NumText
 import com.app.fantasywhisper.ui.components.ResultItem
 import com.app.fantasywhisper.ui.components.TitleText
@@ -117,16 +109,16 @@ fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                     Spacer(Modifier.height(16.dp))
 
                     Text(
-                        text = "Do you want to try something different with your partner and you don't know how to tell them about your desires? Are you a shy person? I built a tool for you!",
+                        text = "Do you want to try something different with your partner and you don't know how to tell them about your desires? Are you a shy person? I built a communication tool for you!",
                         style = MaterialTheme.typography.bodyLarge,
                         color = Color.White.copy(alpha = 0.9f)
                     )
 
                     Spacer(Modifier.height(16.dp))
                     NumText(1, "Choose category you want to \"Whisper\"")
-                    NumText(2, "Choose your desires privately and then let your partner do the same.")
-                    NumText(3, "See ONLY desires that you have in common. (The desires that you both checked)")
-                    NumText(4, "And the last thing is communicating what to do with the result. Now it might be a bit easier, don't you think so?")
+                    NumText(2, "Fill in your desires privately and then let your partner do the same.")
+                    NumText(3, "See ONLY desires that you both have in common.")
+                    NumText(4, "And communicate what to do with the result. \nNow it might be a bit easier, don't you think so?")
 
                     Spacer(Modifier.height(128.dp))
 
@@ -186,54 +178,26 @@ fun DisclaimerBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                 ) {
                     TitleText("Disclaimer")
 
-                    Text(
-                        text = "First of all this is my first app so please be patient with me - there might be bugs."
-                        + "\n" + "Second thing is that this is a very delicate topic and I created the app with few things in mind:\n",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = Color.White.copy(alpha = 0.9f)
-                    )
                     Spacer(Modifier.height(16.dp))
-                    BulletText("Don't force anybody into using this app or having sex, if they don't want to share or have sex then you should be okay with it - plus they'll probably leave you if you are too harsh. (Just remainder)")
-                    BulletText("Be aware that this app can be used against you - if the parnter checks everything then he/she knows your desires. That means you need to trust your partner")
-                    BulletText("I didn't include all kinks - I removed the illegal ones.")
-                    BulletText("Here are some really DANGEROUS or DISGUSTING kinks - be aware of that and don't hurt yourself or your partner")
-                    BulletText("Please don't break any law - in some countries public sex is illegal.")
-                    BulletText("This app is 18+. Kids please turn this app off and go play Minecraft. (It's awesome game)")
+
+                    BulletText("Consent is mandatory. Never use this app to coerce or force anyone into any activity.")
+                    BulletText("Privacy Warning: Sharing your desires requires trust. If someone checks all items, they may see your private preferences.")
+                    BulletText("Content Policy: Illegal or extreme kinks are strictly excluded for safety and legal compliance.")
+                    BulletText("Safety First: Research and practice safety when exploring high-risk activities.")
+                    BulletText("Legal Compliance: Users must ensure their activities comply with local laws in their current jurisdiction.")
+                    BulletText("Age Restriction: This app is strictly for users aged 18+")
 
                     Spacer(Modifier.height(16.dp))
 
-                    Text("This software is free and publicly available - it is not paid, it doesn't collect any personal data, it doesn't need any special permissions.",color = Color.White.copy(alpha = 0.9f))
-                    val annotatedString = buildAnnotatedString {
-                        withStyle(style = SpanStyle(color = Color.White, fontSize = 18.sp)) {
-                            append("The kinks list was taken from this ")
-                        }
-                        // Start of the clickable part
-                        pushStringAnnotation(tag = "URL", annotation = "https://badgirlsbible.com/list-of-kinks-and-fetishes")
-                        withStyle(style = SpanStyle(color = Color.Blue, textDecoration = TextDecoration.Underline)) {
-                            withStyle(style = SpanStyle(color = Color.Blue, fontSize = 18.sp, textDecoration = TextDecoration.Underline)) {
-                                append("website")
-                            }
-                        }
-                        pop()
-                    }
-
-                    val uriHandler = androidx.compose.ui.platform.LocalUriHandler.current
-                    ClickableText(
-                        text = annotatedString,
-                        onClick = { offset ->
-                            annotatedString.getStringAnnotations(tag = "URL", start = offset, end = offset)
-                                .firstOrNull()?.let { annotation ->
-                                    // Use a URI handler to open the link
-                                    uriHandler.openUri(annotation.item)
-                                }
-                        }
-                    )
+                    Text("Privacy & Data: This software is free and publicly available. It does not collect personal data or require special device permissions to function.", color = Color.White.copy(alpha = 0.9f))
 
                     Spacer(Modifier.height(16.dp))
-                    Text("Feel free to suggest updates and new features to me.",color = Color.White.copy(alpha = 0.9f))
-                    Text("I'm not liable for any damage, hurt or death - this software is used only for communication, if you hurt yourself or others then it's your fault, you were warned and should've been careful.",color = Color.White.copy(alpha = 0.9f))
 
-                    Text("The app idea was revealed to me in my dream.", color = MaterialTheme.colorScheme.tertiary)
+                    Text("Feedback: I welcome suggestions for updates and new features.", color = Color.White.copy(alpha = 0.9f))
+                    Text("Liability: This software is provided for communication purposes only. The developer assumes no liability for any injury, loss, or damage resulting from the use of this app.", color = Color.White.copy(alpha = 0.9f))
+                    
+                    ListLink()
+                    Text("The app idea was revealed to me in a dream.", color = MaterialTheme.colorScheme.tertiary)
                 }
             }
         }
