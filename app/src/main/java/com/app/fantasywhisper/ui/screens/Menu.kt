@@ -1,5 +1,7 @@
 package com.app.fantasywhisper.ui.screens
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,14 +30,20 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.app.fantasywhisper.AppDestinations
 import com.app.fantasywhisper.ui.components.AppMenuButton
 import com.app.fantasywhisper.ui.components.BulletText
 import com.app.fantasywhisper.ui.components.EmptyResult
 import com.app.fantasywhisper.ui.components.ListLink
+import com.app.fantasywhisper.ui.components.GitLink
+import com.app.fantasywhisper.ui.components.LobsterFont
 import com.app.fantasywhisper.ui.components.NumText
 import com.app.fantasywhisper.ui.components.ResultItem
 import com.app.fantasywhisper.ui.components.TitleText
+import com.app.fantasywhisper.ui.components.saveData
 import com.app.fantasywhisper.ui.data.cosplayItems
 import com.app.fantasywhisper.ui.data.kinkItems
 import com.app.fantasywhisper.ui.data.placesItems
@@ -190,7 +198,7 @@ fun DisclaimerBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                     Spacer(Modifier.height(16.dp))
 
                     Text("Privacy & Data: This software is free and publicly available. It does not collect personal data or require special device permissions to function.", color = Color.White.copy(alpha = 0.9f))
-
+                    GitLink()
                     Spacer(Modifier.height(16.dp))
 
                     Text("Feedback: I welcome suggestions for updates and new features.", color = Color.White.copy(alpha = 0.9f))
@@ -221,6 +229,15 @@ fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisp
         }
     }
 
+    val context = LocalContext.current
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("text/markdown")
+    ) { uri ->
+        uri?.let { safeUri ->
+            saveData(context, safeUri, listType, indexes)
+        }
+    }
+
     var expandedList = remember {mutableStateListOf<Boolean>().apply {
         addAll(List(indexes.size) {false})
     }}
@@ -247,6 +264,20 @@ fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisp
                 ) {
                     TitleText("Results")
 
+                    Button(
+                        onClick = { launcher.launch("Results.md") },
+                        modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(
+                            MaterialTheme.colorScheme.surface,
+                            White
+                        )
+                    ) {
+                        Text("Export Result", style = MaterialTheme.typography.bodyMedium.copy(
+                            fontFamily = LobsterFont,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+                        ))
+                    }
                     Text(
                         text = "You both want to try or have in common:",
                         style = MaterialTheme.typography.bodyLarge,
@@ -284,7 +315,11 @@ fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisp
                             White
                         )
                     ) {
-                        Text("End Whisper")
+                        Text("End Whisper", style = MaterialTheme.typography.bodyMedium.copy(
+                            fontFamily = LobsterFont,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+                        ))
                     }
                 }
             }

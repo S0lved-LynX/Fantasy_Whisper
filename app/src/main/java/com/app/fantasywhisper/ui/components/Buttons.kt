@@ -31,7 +31,7 @@ fun AppMenuButton(
         ),
         modifier = Modifier.size(width = 186.dp, height = 64.dp)
     ) {
-        Text("Start Whispering", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+        Text("Start Whispering", fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = LobsterFont)
     }
 }
 
@@ -50,6 +50,6 @@ fun WhisperOptionsButton(label: String, modifier: Modifier = Modifier, onClick: 
         ),
         modifier = modifier.height(96.dp)
     ) {
-        Text(label, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+        Text(label, fontSize = 24.sp, fontWeight = FontWeight.Bold, fontFamily = LobsterFont)
     }
 }

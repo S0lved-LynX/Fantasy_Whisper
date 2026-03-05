@@ -21,20 +21,31 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.Font
+import com.app.fantasywhisper.R
 import com.app.fantasywhisper.ui.theme.White
+
+val LobsterFont = FontFamily(
+    Font(resId = R.font.lobstertwo_regular, weight = FontWeight.Normal),
+            Font(resId = R.font.lobstertwo_bold, weight = FontWeight.Bold)
+
+)
 
 @Composable
 fun TitleText (title: String) {
     Text(
         text = title,
         style = MaterialTheme.typography.headlineMedium.copy(
-            fontWeight = FontWeight.Bold
+            fontFamily = LobsterFont,
+            fontWeight = FontWeight.Bold,
+            fontSize = 48.sp
         ),
         textAlign = TextAlign.Center,
         color = Color.White,
@@ -80,7 +91,7 @@ fun EmptyResult (onEndWhisper: () -> Unit) {
                             .padding(12.dp)
                     ) {
                         Text(
-                            text = "It looks like you don't have anything in common, but don't be sad! Try to communicate with your partner and maybe you will find something you both want to try. Or you can try to negotiate a compromise. \nAfter all this app is about communication, so don't be sad about the result and try to find different solution to make your desires come true.\n\n (And also remember: tastes can change!)",
+                            text = "It looks like you don't have anything in common, but don't be sad! Try to communicate with your partner and maybe you will find something you both want to try. Or you can try to negotiate a compromise. \nAfter all this app is about communication, so don't be sad about the result and try to find different solution to make your desires come true.\n\n (And also remember: taste can change!)",
                             style = MaterialTheme.typography.bodyLarge,
                             color = Color.White.copy(alpha = 0.9f)
                         )
@@ -95,7 +106,11 @@ fun EmptyResult (onEndWhisper: () -> Unit) {
                         White
                     )
                 ) {
-                    Text("End Whisper")
+                    Text("End Whisper", style = MaterialTheme.typography.bodyMedium.copy(
+                        fontFamily = LobsterFont,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    ))
                 }
             }
         }
@@ -105,7 +120,7 @@ fun EmptyResult (onEndWhisper: () -> Unit) {
 @Composable
 fun ListLink() {
     val annotatedString = buildAnnotatedString {
-        withStyle(style = SpanStyle(color = Color.White, fontSize = 18.sp)) {
+        withStyle(style = SpanStyle(color = Color.White, fontSize = 16.sp)) {
             append("The kinks list was taken from this ")
         }
         // Start of the clickable part
@@ -113,6 +128,34 @@ fun ListLink() {
         withStyle(style = SpanStyle(color = Color.White, textDecoration = TextDecoration.Underline)) {
             withStyle(style = SpanStyle(color = Color.White, fontSize = 18.sp, textDecoration = TextDecoration.Underline)) {
                 append("website.")
+            }
+        }
+        pop()
+    }
+
+    val uriHandler = androidx.compose.ui.platform.LocalUriHandler.current
+    ClickableText(
+        text = annotatedString,
+        onClick = { offset ->
+            annotatedString.getStringAnnotations(tag = "URL", start = offset, end = offset)
+                .firstOrNull()?.let { annotation ->
+                    uriHandler.openUri(annotation.item)
+                }
+        }
+    )
+}
+
+@Composable
+fun GitLink() {
+    val annotatedString = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Color.White, fontSize = 16.sp)) {
+            append("Licensed under GNU GPLv3. Available at ")
+        }
+        // Start of the clickable part
+        pushStringAnnotation(tag = "URL", annotation = "https://github.com/S0lved-LynX/Fantasy_Whisper")
+        withStyle(style = SpanStyle(color = Color.White, textDecoration = TextDecoration.Underline)) {
+            withStyle(style = SpanStyle(color = Color.White, fontSize = 18.sp, textDecoration = TextDecoration.Underline)) {
+                append("github.com.")
             }
         }
         pop()

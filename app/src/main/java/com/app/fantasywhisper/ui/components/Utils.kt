@@ -1,5 +1,10 @@
 package com.app.fantasywhisper.ui.components
 
+import android.content.Context
+import android.net.Uri
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,17 +21,21 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.app.fantasywhisper.ui.data.cosplayItems
+import com.app.fantasywhisper.ui.data.kinkItems
+import com.app.fantasywhisper.ui.data.placesItems
+import com.app.fantasywhisper.ui.data.roleplayItems
+import com.app.fantasywhisper.ui.screens.WList
 import com.app.fantasywhisper.ui.theme.Crow
 import com.app.fantasywhisper.ui.theme.White
 
@@ -158,5 +167,46 @@ fun ResultItem (
 
             }
         }
+    }
+}
+
+fun saveData(context: Context, uri: Uri, listType: WList, data: List<Int>) {
+    val sourceList = when (listType) {
+        WList.ROLEPLAY -> roleplayItems
+        WList.COSPLAY -> cosplayItems
+        WList.PLACES -> placesItems
+        WList.KINKS -> kinkItems
+    }
+
+    val categoryString = when (listType) {
+        WList.ROLEPLAY -> "# You both want to try those roleplays:  "
+        WList.COSPLAY -> "# You both fantasize about those cosplays:  "
+        WList.PLACES -> "# You both want to try something on those places:  "
+        WList.KINKS -> "# You both have those fantasies in common:  "
+    }
+
+    try {
+        context.contentResolver.openOutputStream(uri)?.use { outputStream ->
+            outputStream.bufferedWriter().use { writer ->
+                writer.write(categoryString)
+                writer.newLine()
+                writer.write("---")
+                writer.newLine()
+                data.forEach { item ->
+                    val data = sourceList[item]
+                    val title = data.name
+                    val description = data.description
+                    writer.write("- **$title**: *$description*")
+                    writer.newLine()
+                    writer.write("---")
+                    writer.newLine()
+                }
+                writer.write("---")
+                writer.newLine()
+            }
+        }
+        Toast.makeText(context, "Saved successfully!", Toast.LENGTH_SHORT).show()
+    } catch (e: Exception) {
+        Toast.makeText(context, "Failed to save", Toast.LENGTH_SHORT).show()
     }
 }

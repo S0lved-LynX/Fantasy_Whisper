@@ -12,13 +12,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.app.fantasywhisper.ui.theme.White
 import com.app.fantasywhisper.ui.data.cosplayItems
 import com.app.fantasywhisper.ui.data.kinkItems
 import com.app.fantasywhisper.ui.data.placesItems
 import com.app.fantasywhisper.ui.data.roleplayItems
 import com.app.fantasywhisper.ui.components.ListItem
+import com.app.fantasywhisper.ui.components.LobsterFont
 import com.app.fantasywhisper.ui.components.TitleText
 
 @Composable
@@ -121,7 +124,11 @@ fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArr
                     White
                 )
             ) {
-                Text(label)
+                Text(label, style = MaterialTheme.typography.bodyMedium.copy(
+                    fontFamily = LobsterFont,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                ))
             }
         }
     }
