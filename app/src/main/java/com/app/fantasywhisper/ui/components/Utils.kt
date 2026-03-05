@@ -3,8 +3,6 @@ package com.app.fantasywhisper.ui.components
 import android.content.Context
 import android.net.Uri
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,15 +19,14 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.Button
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.app.fantasywhisper.ui.data.cosplayItems
 import com.app.fantasywhisper.ui.data.kinkItems
@@ -38,6 +35,8 @@ import com.app.fantasywhisper.ui.data.roleplayItems
 import com.app.fantasywhisper.ui.screens.WList
 import com.app.fantasywhisper.ui.theme.Crow
 import com.app.fantasywhisper.ui.theme.White
+import com.app.fantasywhisper.ui.theme.Rose
+
 
 @Composable
 fun BulletText(text: String) {
@@ -168,6 +167,21 @@ fun ResultItem (
             }
         }
     }
+}
+
+@Composable
+fun PeopleSlider(amount: Int, onValueChange: (Int) -> Unit, range: IntRange) {
+        Slider (
+            value = amount.toFloat(),
+            onValueChange = { onValueChange(it.toInt()) },
+            valueRange = range.first.toFloat()..range.last.toFloat(),
+            steps = (range.last - range.first) -1,
+            colors = SliderDefaults.colors(
+                thumbColor = Rose,
+                activeTrackColor = Rose,
+                inactiveTrackColor = Crow
+            )
+        )
 }
 
 fun saveData(context: Context, uri: Uri, listType: WList, data: List<Int>) {

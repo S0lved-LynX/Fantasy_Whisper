@@ -25,7 +25,7 @@ import com.app.fantasywhisper.ui.components.LobsterFont
 import com.app.fantasywhisper.ui.components.TitleText
 
 @Composable
-fun KinkListCaller(listType: WList, onEnd: () -> Unit) {
+fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
     var state by remember { mutableIntStateOf(0) }
 
     val sourceList = when (listType) {
@@ -45,10 +45,14 @@ fun KinkListCaller(listType: WList, onEnd: () -> Unit) {
                 color = MaterialTheme.colorScheme.primary,
             )
     ) {
-        when (state) {
-            0 -> KinkListScreen(listType,"Proceed to next member",resultList) {state++}
-            1 -> KinkListScreen(listType,"See results",resultList) {state++}
-            else -> ResultScreen(listType,resultList, onEnd)
+        if (state < amountOfPeople) {
+            val buttonText = if (state == amountOfPeople - 1) "See results" else "Proceed to next member"
+
+            key(state) {
+                KinkListScreen(listType, buttonText, resultList) { state++ }
+            }
+        } else {
+            ResultScreen(listType,resultList, onEnd)
         }
     }
 }
@@ -115,6 +119,11 @@ fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArr
                     for (i in sourceList.indices) {
                         update[i] = result.value[i] && checkedList[i]
                     }
+
+                    for (i in sourceList.indices) {
+                       checkedList[i] = false
+                    }
+
                     result.value = update
                     onNext()
                           },
