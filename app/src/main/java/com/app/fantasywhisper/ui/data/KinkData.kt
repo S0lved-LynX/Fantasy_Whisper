@@ -73,6 +73,7 @@ val kinkItems = listOf(
     ListData("Cross-dressing", "Dressing like a member of the opposite sex. For many people, it’s not necessarily sexual, while it is for others. Cross-dressing can involve clothing, accessories, makeup, and wigs."),
     ListData("Crurophilia","A kink related to legs."),
     ListData("Crush fetish", "A particular fetish relating to crushing small animals or objects. Squashing kink is a similar obsession."),
+    ListData("Cuddling", "Usually part of foreplay and/or aftercare. Important part to fulfill partner's emotional needs."),
     ListData("Cunnilingus","This kink can be geared towards receiving oral sex as a woman or giving it either as a man or woman. Cunnilingus plays well with pussy worship. If your partner has a kink for licking pussy, you won’t need to convince him to go down on."),
     ListData("Cupping","Small cups or jars are applied upside down to the body, usually the back. Fire or a hand-pump creates suction that results in temporary bruising and a tight feeling. Extreme cupping can break the skin, but cupping is considered safe (the flame is only used for suction and doesn’t burn the skin)."),
 // D
@@ -125,6 +126,7 @@ val kinkItems = listOf(
     ListData("Harpaxophilia", "The fetish for being robbed. Can be played as a role in consensual non-consent.Chrematistophilia is a similar kink to being forced to pay for sex."),
     ListData("Helplessness", "Any role in which someone is helpless. They may be the victim to their role play partner (robber, kidnapper, etc), or their partner may act as a savior (think of a princess who needs saving or an inept housewife)."),
     ListData("Homeovestism", "Attraction to the clothing of one’s own gender or by people wearing the clothing accepted as appropriate for their gender by society. This fetish was first defined byGeorge Zavitzianos "),
+    ListData("Hugging", "Enjoyment of hugging. Can be enjoyed with another person or plush toy. Can be enjoyed even outside sex acts."),
     ListData("Hybristophilia", "Arousal by the knowledge that one’s partner has committed a heinous act or crime. This weird kink includes cheating, lying, robbery, or murder. This is sometimes known as Bonnie and Clyde Syndrome after the American bank-robbing and murdering duo. One partner is turned on by the other’s bad deeds. Some people find themselves attracted to criminals who are in prison."),
     ListData("Hypnotism", "In an erotic situation, hypnosis could be a form of consensual nonconsent. Try out this kink with some sexy magician/assistant role play."),
     ListData("Hypoxia", "Paraphilia for being submerged under water to restrict breathing, a type of erotic asphyxiation. This kink can be fatal."),
