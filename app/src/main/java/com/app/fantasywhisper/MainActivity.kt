@@ -28,10 +28,28 @@ import androidx.compose.ui.unit.dp
 import com.app.fantasywhisper.ui.theme.FantasyWhisperTheme
 import com.app.fantasywhisper.ui.screens.ContentScreen
 import com.app.fantasywhisper.ui.screens.WhisperChooseScreen
+import android.view.WindowManager
+import android.os.Build
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // MASTG-TEST-0057
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
+
+        // MASTG-TEST-0035
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                window.setHideOverlayWindows(true)
+            }
+        } catch (e: SecurityException) {
+// nothing
+        }
+
         enableEdgeToEdge()
         setContent {
             FantasyWhisperTheme {
