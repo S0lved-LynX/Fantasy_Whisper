@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
@@ -29,10 +30,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import com.app.fantasywhisper.AppDestinations
 import com.app.fantasywhisper.ui.components.AppMenuButton
 import com.app.fantasywhisper.ui.components.BulletText
@@ -67,7 +71,7 @@ fun ContentScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) { innerPadding ->
-            DisclaimerBox(modifier = Modifier.padding(innerPadding), onStartWhisper)
+            DisclaimerBox(modifier = Modifier.padding(innerPadding))
         }
         else -> {}
     }
@@ -146,7 +150,7 @@ fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
 
 
 @Composable
-fun DisclaimerBox(modifier: Modifier, onStartWhisper: () -> Unit) {
+fun DisclaimerBox(modifier: Modifier) {
     Scaffold { padding ->
         Box(
             modifier = Modifier
@@ -321,6 +325,99 @@ fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisp
                             fontSize = 20.sp
                         ))
                     }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun WarningScreen(listType: WList, resultList: MutableState<BooleanArray>, warning: Warning, onEndWhisper: () -> Unit) {
+    val warningText = when (warning) {
+        Warning.Percent90 -> "over 90% of the list"
+        Warning.Percent99 -> "almost all"
+        Warning.ALL -> "all"
+        Warning.OKAY -> "error occurred"
+    }
+
+    var showResult by remember { mutableStateOf(false) }
+
+    Scaffold { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.secondary)
+                .padding(padding)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                    .padding(6.dp)
+            ) {
+                TitleText("Warning")
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(start = 6.dp, top = 32.dp, end = 6.dp, bottom = 32.dp)
+                        .weight(1f)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        MaterialTheme.colorScheme.primary,
+                                        MaterialTheme.colorScheme.surface,
+                                        MaterialTheme.colorScheme.tertiary
+                                    )
+                                ),
+                                shape = RoundedCornerShape(16.dp))
+                            .padding(12.dp)
+                    ) {
+                        Text(
+                            text = "Be aware - someone filled $warningText of the options in list. They are maybe trying to know all of your fantasies. Do you believe all the people you are using this app with?",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = Color.White.copy(alpha = 0.9f)
+                        )
+                    }
+
+                }
+
+                if (showResult) {
+                    ResultScreen(listType,resultList, onEndWhisper)
+                }
+
+                Button(
+                    onClick = { showResult = true },
+                    modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(
+                        MaterialTheme.colorScheme.surface,
+                        White
+                    )
+                ) {
+                    Text("Yes, I believe them and see results.", style = MaterialTheme.typography.bodyMedium.copy(
+                        fontFamily = LobsterFont,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    ))
+                }
+
+                Button(
+                    onClick = onEndWhisper,
+                    modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(
+                        MaterialTheme.colorScheme.surface,
+                        White
+                    )
+                ) {
+                    Text("End Whisper", style = MaterialTheme.typography.bodyMedium.copy(
+                        fontFamily = LobsterFont,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    ))
                 }
             }
         }

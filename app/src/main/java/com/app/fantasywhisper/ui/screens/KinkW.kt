@@ -27,6 +27,7 @@ import com.app.fantasywhisper.ui.components.TitleText
 @Composable
 fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
     var state by remember { mutableIntStateOf(0) }
+    var filledWarning = remember { mutableStateOf(Warning.OKAY) }
 
     val sourceList = when (listType) {
         WList.ROLEPLAY -> roleplayItems
@@ -49,16 +50,20 @@ fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
             val buttonText = if (state == amountOfPeople - 1) "See results" else "Proceed to next member"
 
             key(state) {
-                KinkListScreen(listType, buttonText, resultList) { state++ }
+                KinkListScreen(listType, filledWarning, buttonText, resultList) { state++ }
             }
         } else {
-            ResultScreen(listType,resultList, onEnd)
+            if (filledWarning.value != Warning.OKAY) {
+                WarningScreen(listType, resultList, filledWarning.value, onEnd)
+            } else {
+                ResultScreen(listType, resultList, onEnd)
+            }
         }
     }
 }
 
 @Composable
-fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArray>, onNext: () -> Unit) {
+fun KinkListScreen(source: WList, warning: MutableState<Warning>, label: String, result: MutableState<BooleanArray>, onNext: () -> Unit) {
 
     val sourceList = when (source) {
         WList.ROLEPLAY -> roleplayItems
@@ -115,13 +120,26 @@ fun KinkListScreen(source: WList, label: String, result: MutableState<BooleanArr
             Button(
                 onClick = {
                     val update = result.value.copyOf()
+                    var checkedAmount = 0
 
                     for (i in sourceList.indices) {
                         update[i] = result.value[i] && checkedList[i]
                     }
 
                     for (i in sourceList.indices) {
+                        if (checkedList[i]) {
+                            checkedAmount ++
+                        }
                        checkedList[i] = false
+                    }
+
+                    val percentage = (checkedAmount.toFloat() / checkedList.size.toFloat()) * 100
+                    if (percentage >= 100) {
+                        warning.value = Warning.ALL
+                    } else if (percentage >= 99) {
+                        warning.value = Warning.Percent99
+                    } else if (percentage >= 90) {
+                        warning.value = Warning.Percent90
                     }
 
                     result.value = update
@@ -148,5 +166,12 @@ enum class WList() {
     ROLEPLAY,
     COSPLAY,
     PLACES
+}
+
+enum class Warning() {
+    OKAY,
+    Percent90,
+    Percent99,
+    ALL
 }
 
