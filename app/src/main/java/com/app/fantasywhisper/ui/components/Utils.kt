@@ -36,6 +36,7 @@ import com.app.fantasywhisper.ui.screens.WList
 import com.app.fantasywhisper.ui.theme.Crow
 import com.app.fantasywhisper.ui.theme.White
 import com.app.fantasywhisper.ui.theme.Rose
+import kotlin.math.roundToInt
 
 
 @Composable
@@ -170,12 +171,12 @@ fun ResultItem (
 }
 
 @Composable
-fun PeopleSlider(amount: Int, onValueChange: (Int) -> Unit, range: IntRange) {
+fun PeopleSlider(amount: Int, onValueChange: (Int) -> Unit) {
         Slider (
-            value = amount.toFloat(),
-            onValueChange = { onValueChange(it.toInt()) },
-            valueRange = range.first.toFloat()..range.last.toFloat(),
-            steps = (range.last - range.first) -1,
+            value = amount.coerceIn(2,50).toFloat(),
+            onValueChange = { onValueChange(it.roundToInt()) },
+            valueRange = 2f..50f,
+            steps = 47,
             colors = SliderDefaults.colors(
                 thumbColor = Rose,
                 activeTrackColor = Rose,

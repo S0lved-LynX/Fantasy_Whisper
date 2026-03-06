@@ -72,8 +72,7 @@ fun WhisperChooseScreen(onBack: () -> Unit) {
 
             PeopleSlider(
                 numberOfParticipants,
-                onValueChange = {newValue -> numberOfParticipants = newValue},
-                range = 2..50
+                onValueChange = {newValue -> numberOfParticipants = newValue}
             )
         }
 
