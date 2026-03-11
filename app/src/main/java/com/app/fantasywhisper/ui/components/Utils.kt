@@ -175,7 +175,7 @@ fun PeopleSlider(amount: Int, onValueChange: (Int) -> Unit) {
         Slider (
             value = amount.coerceIn(2,50).toFloat(),
             onValueChange = { onValueChange(it.roundToInt()) },
-            valueRange = 2f..50f,
+            valueRange = 1f..69f,
             steps = 47,
             colors = SliderDefaults.colors(
                 thumbColor = Rose,
@@ -211,12 +211,14 @@ fun saveData(context: Context, uri: Uri, listType: WList, data: List<Int>) {
                     val data = sourceList[item]
                     val title = data.name
                     val description = data.description
-                    writer.write("- **$title**: *$description*")
+                    writer.write("- [ ] **$title**: *$description*")
                     writer.newLine()
                     writer.write("---")
                     writer.newLine()
                 }
                 writer.write("---")
+                writer.newLine()
+                writer.write("Best use with Obsidian md")
                 writer.newLine()
             }
         }
