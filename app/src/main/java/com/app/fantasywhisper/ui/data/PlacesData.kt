@@ -1,6 +1,5 @@
 package com.app.fantasywhisper.ui.data
 
-// nature later
 val placesItems = listOf (
     ListData("In kitchen", ""),
     ListData("In a bathtub", ""),
@@ -71,7 +70,7 @@ val placesItems = listOf (
     ListData("On a soft rug in front of a fireplace", ""),
     ListData("At the automated carwash", ""),
     ListData("At the tanning bed", ""),
-    ListData("On your kids' swing set", ""),
+    ListData("On swing set", ""),
     ListData("Underneath an overpass", ""),
     ListData("On a vibrating bed", ""),
     ListData("Inside a walk-in closet", ""),
@@ -179,7 +178,7 @@ val placesItems = listOf (
     ListData("Inside a cave or under an overhang", ""),
     ListData("At the end of an old dead-end country road", ""),
     ListData("Somewhere close to the middle of a closed road", ""),
-    ListData("By a creek during the daytime", ""),    ListData("", ""),
+    ListData("By a creek during the daytime", ""),
     ListData("On the mountains top", ""),
     ListData("In the dark forest", ""),
     ListData("In a sunflower field", ""),

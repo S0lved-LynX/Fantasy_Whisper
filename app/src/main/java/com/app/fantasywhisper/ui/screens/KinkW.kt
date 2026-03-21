@@ -50,7 +50,7 @@ fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
             val buttonText = if (state == amountOfPeople - 1) "See results" else "Proceed to next member"
 
             key(state) {
-                KinkListScreen(listType, filledWarning, buttonText, resultList) { state++ }
+                KinkListScreen(listType, filledWarning, state, buttonText, resultList) { state++ }
             }
         } else {
             if (filledWarning.value != Warning.OKAY) {
@@ -63,7 +63,7 @@ fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
 }
 
 @Composable
-fun KinkListScreen(source: WList, warning: MutableState<Warning>, label: String, result: MutableState<BooleanArray>, onNext: () -> Unit) {
+fun KinkListScreen(source: WList, warning: MutableState<Warning>, personIndex: Int, label: String, result: MutableState<BooleanArray>, onNext: () -> Unit) {
 
     val sourceList = when (source) {
         WList.ROLEPLAY -> roleplayItems
@@ -89,7 +89,7 @@ fun KinkListScreen(source: WList, warning: MutableState<Warning>, label: String,
                 .background(MaterialTheme.colorScheme.tertiary),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            TitleText("Select boxes")
+            TitleText("Person #${personIndex+1}")
             // List
             LazyColumn(
                 modifier = Modifier.weight(1f),
