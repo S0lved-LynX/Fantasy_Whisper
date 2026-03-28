@@ -173,10 +173,10 @@ fun ResultItem (
 @Composable
 fun PeopleSlider(amount: Int, onValueChange: (Int) -> Unit) {
         Slider (
-            value = amount.coerceIn(2,50).toFloat(),
+            value = amount.coerceIn(1,69).toFloat(),
             onValueChange = { onValueChange(it.roundToInt()) },
             valueRange = 1f..69f,
-            steps = 47,
+            steps = 67,
             colors = SliderDefaults.colors(
                 thumbColor = Rose,
                 activeTrackColor = Rose,
