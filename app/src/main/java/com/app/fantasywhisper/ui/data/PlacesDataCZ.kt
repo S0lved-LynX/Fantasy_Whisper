@@ -170,6 +170,7 @@ val placesItemsCZ = listOf (
     ListData("Na dně kaňonu nebo rokle", ""),
     ListData("V lesní školce", "Nebo též stromová školka je místem, kterém se pěstují nové stromky. Ty se pak prodávají v obchodech a na tržištích před Vánoci."),
     ListData("V zoo", ""),
+    ListData("Na stromě", "Nezapomeňte však zvolit opravdu silnou větev!"),
     ListData("Uprostřed seníku", ""),
     ListData("V kukuřičném bludišti na Halloween", ""),
     ListData("Na vinici", ""),

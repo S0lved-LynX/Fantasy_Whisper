@@ -137,6 +137,7 @@ val placesItems = listOf (
     ListData("On a movie set", ""),
     ListData("In a fabric store", ""),
     ListData("Under a willow tree", ""),
+    ListData("On a tree", "You need to choose a really strong branch."),
     ListData("At a castle", ""),
     ListData("At a hair salon", ""),
     ListData("In a florist's shop", ""),
