@@ -4,23 +4,23 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.fantasywhisper.AppLang
 import com.app.fantasywhisper.ui.theme.White
-import com.app.fantasywhisper.ui.data.cosplayItems
-import com.app.fantasywhisper.ui.data.kinkItems
-import com.app.fantasywhisper.ui.data.placesItems
-import com.app.fantasywhisper.ui.data.roleplayItems
 import com.app.fantasywhisper.ui.components.ListItem
 import com.app.fantasywhisper.ui.components.LobsterFont
 import com.app.fantasywhisper.ui.components.TitleText
@@ -82,6 +82,15 @@ fun KinkListScreen(source: WList, warning: MutableState<Warning>, personIndex: I
         addAll(List(sourceList.size) {false})
     }}
 
+    var searchQuery by remember {mutableStateOf("")}
+    val filteredList = remember(searchQuery, sourceList) {
+        sourceList.withIndex().filter { (index, data) ->
+            data.name.contains(searchQuery, ignoreCase = true) ||
+                    data.description.contains(searchQuery, ignoreCase = true)
+
+        }
+    }
+
     Scaffold (
         contentColor = MaterialTheme.colorScheme.tertiary
     ){ padding ->
@@ -92,13 +101,39 @@ fun KinkListScreen(source: WList, warning: MutableState<Warning>, personIndex: I
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             TitleText(lang.listTitle(personIndex+1))
+
+            // Search bar
+            TextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                shape = RoundedCornerShape(12.dp),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White,
+
+                    cursorColor = Color.Red,
+
+                    focusedContainerColor = MaterialTheme.colorScheme.secondary,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
+
+                    focusedIndicatorColor = MaterialTheme.colorScheme.background,
+                    unfocusedIndicatorColor = MaterialTheme.colorScheme.background
+                ),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
+                placeholder = { Text(lang.searchText) }
+            )
             // List
             LazyColumn(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                items (sourceList.size) { index ->
-                    val data = sourceList[index]
+                items (filteredList.size, key = {i -> filteredList[i].index}
+                ) { i ->
+                    val item = filteredList[i]
+                    val index = item.index
+                    val data = item.value
                     val title = data.name
                     val description = data.description
                     val checked = checkedList[index]

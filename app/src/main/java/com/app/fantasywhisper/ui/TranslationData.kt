@@ -47,6 +47,7 @@ interface AppStrings {
     val disLiability: String
     val disLink: String
     val disWeb: String
+    val searchText: String
 
     // data
     val kinkData: List<ListData>
@@ -124,6 +125,7 @@ object EnglishStrings : AppStrings {
     override val disGit = "Licensed under GNU GPLv3. Available at "
     override val disLink = "The kinks list was taken from this "
     override val disWeb = "website."
+    override val searchText = "Search..."
 
 
     // data
@@ -133,7 +135,7 @@ object EnglishStrings : AppStrings {
     override val placesData = placesItems
 
     // list screen
-    override fun listTitle(index: Int) = "Person #${index}}"
+    override fun listTitle(index: Int) = "Person #$index"
 
     // result screen
     override val resTitle = "Result"
@@ -201,6 +203,7 @@ object CzechStrings : AppStrings {
     override val disGit = "Licencováno pod GNU GPLv3. Dostupné na "
     override val disLink = "Seznam kinků byl převzat z tohoto "
     override val disWeb = "webu."
+    override val searchText = "Hledej..."
 
     // data
     override val kinkData = kinkItemsCZ
@@ -209,7 +212,7 @@ object CzechStrings : AppStrings {
     override val placesData = placesItemsCZ
 
     // list screen
-    override fun listTitle (index: Int) = "Osoba #${index}"
+    override fun listTitle (index: Int) = "Osoba #$index"
 
     // result screen
     override val resTitle = "Výsledek"
