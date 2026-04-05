@@ -12,12 +12,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.fantasywhisper.AppLang
 import com.app.fantasywhisper.ui.theme.Rose
 
 @Composable
 fun AppMenuButton(
     onClick: () -> Unit,
 ) {
+    val lang = AppLang.current
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(18.dp),
@@ -31,7 +33,29 @@ fun AppMenuButton(
         ),
         modifier = Modifier.size(width = 186.dp, height = 64.dp)
     ) {
-        Text("Start Whispering", fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = LobsterFont)
+        Text(lang.menuButton, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = LobsterFont)
+    }
+}
+
+@Composable
+fun MenuLangButton(
+    changeLang: () -> Unit,
+) {
+    val lang = AppLang.current
+    Button(
+        onClick = changeLang,
+        shape = RoundedCornerShape(18.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Rose,
+            contentColor = Color.White
+        ),
+        elevation = ButtonDefaults.elevatedButtonElevation(
+            defaultElevation = 24.dp,
+            pressedElevation = 6.dp
+        ),
+        modifier = Modifier.size(width = 186.dp, height = 64.dp)
+    ) {
+        Text(lang.menuLangButton, fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = LobsterFont)
     }
 }
 

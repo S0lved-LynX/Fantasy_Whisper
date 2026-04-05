@@ -30,6 +30,15 @@ import com.app.fantasywhisper.ui.screens.ContentScreen
 import com.app.fantasywhisper.ui.screens.WhisperChooseScreen
 import android.view.WindowManager
 import android.os.Build
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
+import com.app.fantasywhisper.ui.AppStrings
+import com.app.fantasywhisper.ui.CzechStrings
+import com.app.fantasywhisper.ui.EnglishStrings
+
+val AppLang = staticCompositionLocalOf<AppStrings> { EnglishStrings }
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +73,10 @@ class MainActivity : ComponentActivity() {
 fun FantasyWhisperApp() {
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
     val showBottom = currentDestination != AppDestinations.LIST
+    var currentLang by remember { mutableStateOf<AppStrings> (EnglishStrings) }
+    val changeLang: () -> Unit = {
+        currentLang = if (currentLang is CzechStrings) EnglishStrings else CzechStrings
+    }
 
     BackHandler(enabled = currentDestination == AppDestinations.DISCLAIMER) {
         currentDestination = AppDestinations.HOME
@@ -71,46 +84,50 @@ fun FantasyWhisperApp() {
 
     BackHandler(enabled = currentDestination == AppDestinations.HOME) {/*nothing*/}
 
-    if (showBottom) {
-        NavigationSuiteScaffold(
-            navigationSuiteItems = {
-                AppDestinations.entries
-                    .filter { it != AppDestinations.LIST && it != AppDestinations.RESULT }
-                    .forEach {
-                        var isSelected = it == currentDestination
+    CompositionLocalProvider(AppLang provides currentLang) {
+        val lang = AppLang.current
+        if (showBottom) {
+            NavigationSuiteScaffold(
+                navigationSuiteItems = {
+                    AppDestinations.entries
+                        .filter { it != AppDestinations.LIST && it != AppDestinations.RESULT }
+                        .forEach {
+                            var isSelected = it == currentDestination
 
-
-                        item(
-                            icon = {
-                                Box(
-                                    modifier = Modifier
-                                        .size(48.dp),
-                                    contentAlignment = Alignment.BottomCenter
-                                ) {
-                                    Icon(
-                                        it.icon,
-                                        contentDescription = it.label,
+                            item(
+                                icon = {
+                                    Box(
                                         modifier = Modifier
-                                            .size(if (isSelected) 48.dp else 32.dp)
-                                    )
-                                }
-                            },
-                            label = { Text(it.label) },
-                            selected = isSelected,
-                            onClick = { currentDestination = it }
-                        )
+                                            .size(48.dp),
+                                        contentAlignment = Alignment.BottomCenter
+                                    ) {
+                                        Icon(
+                                            it.icon,
+                                            contentDescription = it.label,
+                                            modifier = Modifier
+                                                .size(if (isSelected) 48.dp else 32.dp)
+                                        )
+                                    }
+                                },
+                                label = { Text(it.label) },
+                                selected = isSelected,
+                                onClick = { currentDestination = it }
+                            )
 
-                    }
-            }
-        ) {
+                        }
+                }
+            ) {
 
-            ContentScreen(currentDestination) {
-                currentDestination = AppDestinations.LIST
+                ContentScreen(
+                    currentDestination,
+                    changeLang = changeLang,
+                    { currentDestination = AppDestinations.LIST }
+                )
             }
-        }
-    } else {
-        WhisperChooseScreen {
-            currentDestination = AppDestinations.HOME
+        } else {
+            WhisperChooseScreen {
+                currentDestination = AppDestinations.HOME
+            }
         }
     }
 }
@@ -122,5 +139,5 @@ enum class AppDestinations(
     HOME("Home", Icons.Default.Home),
     DISCLAIMER("Disclaimer",Icons.Default.Info),
     LIST("List", Icons.Default.Menu),
-    RESULT("Results",Icons.Default.Done)
+    RESULT("Results",Icons.Default.Done),
 }

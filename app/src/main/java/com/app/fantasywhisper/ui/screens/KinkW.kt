@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.fantasywhisper.AppLang
 import com.app.fantasywhisper.ui.theme.White
 import com.app.fantasywhisper.ui.data.cosplayItems
 import com.app.fantasywhisper.ui.data.kinkItems
@@ -26,14 +27,15 @@ import com.app.fantasywhisper.ui.components.TitleText
 
 @Composable
 fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
+    val lang = AppLang.current
     var state by remember { mutableIntStateOf(0) }
     var filledWarning = remember { mutableStateOf(Warning.OKAY) }
 
     val sourceList = when (listType) {
-        WList.ROLEPLAY -> roleplayItems
-        WList.COSPLAY -> cosplayItems
-        WList.PLACES -> placesItems
-        WList.KINKS -> kinkItems
+        WList.ROLEPLAY -> lang.roleplayData
+        WList.COSPLAY -> lang.cosplayData
+        WList.PLACES -> lang.placesData
+        WList.KINKS -> lang.kinkData
     }
 
     var resultList = remember { mutableStateOf(BooleanArray(sourceList.size) {true})}
@@ -47,7 +49,7 @@ fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
             )
     ) {
         if (state < amountOfPeople) {
-            val buttonText = if (state == amountOfPeople - 1) "See results" else "Proceed to next member"
+            val buttonText = if (state == amountOfPeople - 1) lang.buttonResult else lang.buttonNext
 
             key(state) {
                 KinkListScreen(listType, filledWarning, state, buttonText, resultList) { state++ }
@@ -64,12 +66,12 @@ fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
 
 @Composable
 fun KinkListScreen(source: WList, warning: MutableState<Warning>, personIndex: Int, label: String, result: MutableState<BooleanArray>, onNext: () -> Unit) {
-
+    val lang = AppLang.current
     val sourceList = when (source) {
-        WList.ROLEPLAY -> roleplayItems
-        WList.COSPLAY -> cosplayItems
-        WList.PLACES -> placesItems
-        WList.KINKS -> kinkItems
+        WList.ROLEPLAY -> lang.roleplayData
+        WList.COSPLAY -> lang.cosplayData
+        WList.PLACES -> lang.placesData
+        WList.KINKS -> lang.kinkData
     }
 
     var checkedList = remember {mutableStateListOf<Boolean>().apply {
@@ -89,7 +91,7 @@ fun KinkListScreen(source: WList, warning: MutableState<Warning>, personIndex: I
                 .background(MaterialTheme.colorScheme.tertiary),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            TitleText("Person #${personIndex+1}")
+            TitleText(lang.listTitle(personIndex+1))
             // List
             LazyColumn(
                 modifier = Modifier.weight(1f),

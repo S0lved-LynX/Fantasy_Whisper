@@ -32,6 +32,10 @@ import com.app.fantasywhisper.ui.data.cosplayItems
 import com.app.fantasywhisper.ui.data.kinkItems
 import com.app.fantasywhisper.ui.data.placesItems
 import com.app.fantasywhisper.ui.data.roleplayItems
+import com.app.fantasywhisper.ui.data.cosplayItemsCZ
+import com.app.fantasywhisper.ui.data.kinkItemsCZ
+import com.app.fantasywhisper.ui.data.placesItemsCZ
+import com.app.fantasywhisper.ui.data.roleplayItemsCZ
 import com.app.fantasywhisper.ui.screens.WList
 import com.app.fantasywhisper.ui.theme.Crow
 import com.app.fantasywhisper.ui.theme.White
@@ -185,25 +189,28 @@ fun PeopleSlider(amount: Int, onValueChange: (Int) -> Unit) {
         )
 }
 
-fun saveData(context: Context, uri: Uri, listType: WList, data: List<Int>) {
-    val sourceList = when (listType) {
-        WList.ROLEPLAY -> roleplayItems
-        WList.COSPLAY -> cosplayItems
-        WList.PLACES -> placesItems
-        WList.KINKS -> kinkItems
-    }
+fun saveData(context: Context, uri: Uri, listType: WList, data: List<Int>, titleString: String, obsidian: String, success: String, fail: String, lang: Boolean) {
 
-    val categoryString = when (listType) {
-        WList.ROLEPLAY -> "# You both want to try those roleplays:  "
-        WList.COSPLAY -> "# You both fantasize about those cosplays:  "
-        WList.PLACES -> "# You both want to try something on those places:  "
-        WList.KINKS -> "# You both have those fantasies in common:  "
+    val sourceList = if (lang) {
+        when (listType) {
+            WList.ROLEPLAY -> roleplayItems
+            WList.COSPLAY -> cosplayItems
+            WList.PLACES -> placesItems
+            WList.KINKS -> kinkItems
+        }
+    } else {
+        when (listType) {
+            WList.ROLEPLAY -> roleplayItemsCZ
+            WList.COSPLAY -> cosplayItemsCZ
+            WList.PLACES -> placesItemsCZ
+            WList.KINKS -> kinkItemsCZ
+        }
     }
 
     try {
         context.contentResolver.openOutputStream(uri)?.use { outputStream ->
             outputStream.bufferedWriter().use { writer ->
-                writer.write(categoryString)
+                writer.write(titleString)
                 writer.newLine()
                 writer.write("---")
                 writer.newLine()
@@ -218,12 +225,12 @@ fun saveData(context: Context, uri: Uri, listType: WList, data: List<Int>) {
                 }
                 writer.write("---")
                 writer.newLine()
-                writer.write("Best use with Obsidian md")
+                writer.write(obsidian)
                 writer.newLine()
             }
         }
-        Toast.makeText(context, "Saved successfully!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, success, Toast.LENGTH_SHORT).show()
     } catch (e: Exception) {
-        Toast.makeText(context, "Failed to save", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, fail, Toast.LENGTH_SHORT).show()
     }
 }
