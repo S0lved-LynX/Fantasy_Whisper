@@ -38,7 +38,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.app.fantasywhisper.AppDestinations
+import com.app.fantasywhisper.AppLang
+import com.app.fantasywhisper.ui.EnglishStrings
 import com.app.fantasywhisper.ui.components.AppMenuButton
+import com.app.fantasywhisper.ui.components.MenuLangButton
 import com.app.fantasywhisper.ui.components.BulletText
 import com.app.fantasywhisper.ui.components.EmptyResult
 import com.app.fantasywhisper.ui.components.ListLink
@@ -58,6 +61,7 @@ import com.app.fantasywhisper.ui.theme.White
 @Composable
 fun ContentScreen(
     destinations: AppDestinations,
+    changeLang: () -> Unit,
     onStartWhisper: () -> Unit
 ) {
     when (destinations) {
@@ -65,7 +69,7 @@ fun ContentScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) { innerPadding ->
-            MenuTextBox(modifier = Modifier.padding(innerPadding), onStartWhisper)
+            MenuTextBox(modifier = Modifier.padding(innerPadding), changeLang, onStartWhisper)
         }
         AppDestinations.DISCLAIMER -> Scaffold(
             modifier = Modifier
@@ -73,12 +77,14 @@ fun ContentScreen(
         ) { innerPadding ->
             DisclaimerBox(modifier = Modifier.padding(innerPadding))
         }
+
         else -> {}
     }
 }
 
 @Composable
-fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
+fun MenuTextBox(modifier: Modifier, changeLang: () -> Unit, onStartWhisper: () -> Unit) {
+    val lang = AppLang.current
     Scaffold { padding ->
         Box(
             modifier = Modifier
@@ -116,21 +122,21 @@ fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                         )
                         .padding(6.dp)
                 ) {
-                    TitleText("Welcome")
+                    TitleText(lang.menuTitle)
 
                     Spacer(Modifier.height(16.dp))
 
                     Text(
-                        text = "Do you want to try something different with your partner and you don't know how to tell them about your desires? Are you a shy person? I built a communication tool for you!",
+                        text = lang.menuText,
                         style = MaterialTheme.typography.bodyLarge,
                         color = Color.White.copy(alpha = 0.9f)
                     )
 
                     Spacer(Modifier.height(16.dp))
-                    NumText(1, "Choose category you want to \"Whisper\"")
-                    NumText(2, "Fill in your desires privately and then let your partner do the same.")
-                    NumText(3, "See ONLY desires that you both have in common.")
-                    NumText(4, "And communicate what to do with the result. \nNow it might be a bit easier, don't you think so?")
+                    NumText(1, lang.menuPointOne)
+                    NumText(2, lang.menuPointTwo)
+                    NumText(3, lang.menuPointThree)
+                    NumText(4, lang.menuPointFour)
 
                     Spacer(Modifier.height(128.dp))
 
@@ -142,6 +148,17 @@ fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
                             onClick = onStartWhisper
                         )
                     }
+
+                    Spacer(Modifier.height(8.dp))
+
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        MenuLangButton(
+                            changeLang = changeLang
+                        )
+                    }
                 }
             }
         }
@@ -151,6 +168,7 @@ fun MenuTextBox(modifier: Modifier, onStartWhisper: () -> Unit) {
 
 @Composable
 fun DisclaimerBox(modifier: Modifier) {
+    val lang = AppLang.current
     Scaffold { padding ->
         Box(
             modifier = Modifier
@@ -188,25 +206,25 @@ fun DisclaimerBox(modifier: Modifier) {
                         )
                         .padding(6.dp)
                 ) {
-                    TitleText("Disclaimer")
+                    TitleText(lang.menuDis)
 
                     Spacer(Modifier.height(16.dp))
 
-                    BulletText("Consent is mandatory. Never use this app to coerce or force anyone into any activity.")
-                    BulletText("Privacy Warning: Sharing your desires requires trust. If someone checks all items, they may see your private preferences.")
-                    BulletText("Content Policy: Illegal or extreme kinks are strictly excluded for safety and legal compliance.")
-                    BulletText("Safety First: Research and practice safety when exploring high-risk activities.")
-                    BulletText("Legal Compliance: Users must ensure their activities comply with local laws in their current jurisdiction.")
-                    BulletText("Age Restriction: This app is strictly for users aged 18+")
+                    BulletText(lang.disBull1)
+                    BulletText(lang.disBull2)
+                    BulletText(lang.disBull3)
+                    BulletText(lang.disBull4)
+                    BulletText(lang.disBull5)
+                    BulletText(lang.disBull6)
 
                     Spacer(Modifier.height(16.dp))
 
-                    Text("Privacy & Data: This software is free and publicly available. It does not collect personal data or require special device permissions to function.", color = Color.White.copy(alpha = 0.9f))
+                    Text(lang.disPriv, color = Color.White.copy(alpha = 0.9f))
                     GitLink()
                     Spacer(Modifier.height(16.dp))
 
-                    Text("Feedback: I welcome suggestions for updates and new features.", color = Color.White.copy(alpha = 0.9f))
-                    Text("Liability: This software is provided for communication purposes only. The developer assumes no liability for any injury, loss, or damage resulting from the use of this app.", color = Color.White.copy(alpha = 0.9f))
+                    Text(lang.disFeed, color = Color.White.copy(alpha = 0.9f))
+                    Text(lang.disLiability, color = Color.White.copy(alpha = 0.9f))
 
                     ListLink()
                     Text("The app idea was revealed to me in a dream.", color = MaterialTheme.colorScheme.tertiary)
@@ -218,12 +236,22 @@ fun DisclaimerBox(modifier: Modifier) {
 
 @Composable
 fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisper: () -> Unit) {
+    val lang = AppLang.current
+
     val sourceList = when (listType) {
-        WList.ROLEPLAY -> roleplayItems
-        WList.COSPLAY -> cosplayItems
-        WList.PLACES -> placesItems
-        WList.KINKS -> kinkItems
+        WList.ROLEPLAY -> lang.roleplayData
+        WList.COSPLAY -> lang.cosplayData
+        WList.PLACES -> lang.placesData
+        WList.KINKS -> lang.kinkData
     }
+    val categoryString = when (listType) {
+        WList.ROLEPLAY -> lang.expRoleplays
+        WList.COSPLAY -> lang.expCosplays
+        WList.PLACES -> lang.expPlaces
+        WList.KINKS -> lang.expKinks
+    }
+    val langBool = if (AppLang.current == EnglishStrings) true else false
+
     val result = number.value
     var indexes = remember {mutableStateListOf<Int>()}
 
@@ -238,7 +266,7 @@ fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisp
         contract = ActivityResultContracts.CreateDocument("text/markdown")
     ) { uri ->
         uri?.let { safeUri ->
-            saveData(context, safeUri, listType, indexes)
+            saveData(context, safeUri, listType, indexes, categoryString, lang.obsidianInfo, lang.okSave, lang.badSave, langBool)
         }
     }
 
@@ -266,24 +294,24 @@ fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisp
                         )
                         .padding(6.dp)
                 ) {
-                    TitleText("Results")
+                    TitleText(lang.resTitle)
 
                     Button(
-                        onClick = { launcher.launch("Results.md") },
+                        onClick = { launcher.launch(lang.resFileName) },
                         modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(
                             MaterialTheme.colorScheme.surface,
                             White
                         )
                     ) {
-                        Text("Export Result", style = MaterialTheme.typography.bodyMedium.copy(
+                        Text(lang.resExportButton, style = MaterialTheme.typography.bodyMedium.copy(
                             fontFamily = LobsterFont,
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp
                         ))
                     }
                     Text(
-                        text = "You both want to try or have in common:",
+                        text = lang.resText,
                         style = MaterialTheme.typography.bodyLarge,
                         color = Color.White.copy(alpha = 0.9f)
                     )
@@ -319,7 +347,7 @@ fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisp
                             White
                         )
                     ) {
-                        Text("End Whisper", style = MaterialTheme.typography.bodyMedium.copy(
+                        Text(lang.resEnd, style = MaterialTheme.typography.bodyMedium.copy(
                             fontFamily = LobsterFont,
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp
@@ -333,11 +361,13 @@ fun ResultScreen(listType: WList, number: MutableState<BooleanArray>, onEndWhisp
 
 @Composable
 fun WarningScreen(listType: WList, resultList: MutableState<BooleanArray>, warning: Warning, onEndWhisper: () -> Unit) {
+    val lang = AppLang.current
+
     val warningText = when (warning) {
-        Warning.Percent90 -> "over 90% of the list"
-        Warning.Percent99 -> "almost all"
-        Warning.ALL -> "all"
-        Warning.OKAY -> "error occurred"
+        Warning.Percent90 -> lang.warnPercent90
+        Warning.Percent99 -> lang.warnPercent99
+        Warning.ALL -> lang.warnALL
+        Warning.OKAY -> lang.warnOKAY
     }
 
     var showResult by remember { mutableStateOf(false) }
@@ -357,7 +387,7 @@ fun WarningScreen(listType: WList, resultList: MutableState<BooleanArray>, warni
                     )
                     .padding(6.dp)
             ) {
-                TitleText("Warning")
+                TitleText(lang.warnTitle)
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -378,7 +408,7 @@ fun WarningScreen(listType: WList, resultList: MutableState<BooleanArray>, warni
                             .padding(12.dp)
                     ) {
                         Text(
-                            text = "Be aware - someone filled $warningText of the options in list. They are maybe trying to know all of your fantasies. Do you believe all the people you are using this app with?",
+                            text = lang.warnText(warningText),
                             style = MaterialTheme.typography.bodyLarge,
                             color = Color.White.copy(alpha = 0.9f)
                         )
@@ -398,7 +428,7 @@ fun WarningScreen(listType: WList, resultList: MutableState<BooleanArray>, warni
                         White
                     )
                 ) {
-                    Text("Yes, I believe them and see results.", style = MaterialTheme.typography.bodyMedium.copy(
+                    Text(lang.warnContinue, style = MaterialTheme.typography.bodyMedium.copy(
                         fontFamily = LobsterFont,
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp
@@ -413,7 +443,7 @@ fun WarningScreen(listType: WList, resultList: MutableState<BooleanArray>, warni
                         White
                     )
                 ) {
-                    Text("End Whisper", style = MaterialTheme.typography.bodyMedium.copy(
+                    Text(lang.resEnd, style = MaterialTheme.typography.bodyMedium.copy(
                         fontFamily = LobsterFont,
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp

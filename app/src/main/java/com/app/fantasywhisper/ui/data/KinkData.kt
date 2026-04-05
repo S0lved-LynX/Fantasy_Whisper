@@ -13,7 +13,7 @@ val kinkItems = listOf(
     // A
     ListData("Abasiophilia", "An unusual type of kink involving attraction to people in neck braces, wheelchairs, casts, or other devices that impair mobility. It may be part of a medical fetish or enjoyed because it restricts movement."),
     ListData("Abduction as seduction", "A kink where the abductor/kidnapper treats the victim in a loving manner (can be related to gentle femdom)."),
-    ListData("Abrasions", "People who enjoy this fetish like giving or receiving cuts and scrapes."),
+    ListData("Abrasions", "Lidé, kteří mají rádi tento fetiš, mají rádi, když jim někdo způsobuje řezné rány a oděrky, nebo když je sami způsobují."),
     ListData("Acarophilia", "Arousal from scratching. Scratching is often an element incorporated into rough sex."),
     ListData("Accidental stimulation", "Refers to accidental physical stimulation and situations that arouse adrenaline and cause arousal."),
     ListData("Acrotomophilia", "Fetish for amputees. Fetishists may prefer a specific type of amputee (arm, leg, etc). A person with a fetish for being an amputee has apotemnophilia. There may be overlap with morphophilia, and some find these to be extreme fetishes."),
@@ -118,7 +118,7 @@ val kinkItems = listOf(
     ListData("Furries","This kink is hot, literally. Furries dress as animals or humanoid animal creatures, sometimes decked head-to-toe in fur. They often don animalistic dildos via strap-ons to enhance their furry play. Many furries engage in role playing games and cosplay as part of their lifestyle, which can become quite expensive. Some furries engage only in costumes and role play with no sexual activity (although some people do not see a distinction) To differentiate, “yiffy” refers to a sexualized furry fetish."),
 // G
     ListData("Gags","A form of mouth bondage. Gags come in many forms, but ball gags are the most common. They may also take the form of a bit, cleave, pacifier, penis, or spider gag, among others. Mouth gags aren’t usually dangerous, but they can be uncomfortable. Make sure to fit the gag properly to your (or your partner’s) mouth."),
-    ListData("Gerontophilia","Attraction to someone from a much older age group. May-December relationshipscan fall into this kinkif the members of the couple specifically fetishize the age difference.  "),
+    ListData("Gerontophilia","Attraction to someone from a much older age group. May-December relationships can fall into this kink if the members of the couple specifically fetishize the age difference."),
     ListData("Golden showers", "See watersports."),
     ListData("Group sex (Polyiterophilia)", "Group sex and multiple-party scenarios can be quite hot, but they can also be uncomfortable. Threesomes are one of the more common arrangements (and a fascination with three-person sex is known as troilism)."),
 // H
@@ -140,7 +140,7 @@ val kinkItems = listOf(
     ListData("Intercrural or interfemoral sex", "Thrusting between someone’s thighs without penetration."),
     ListData("Intoxication", "Taking drugs or alcohol during or before a sex scene. Intoxication can lead to poor decision-making, risky behavior, and mistakes that could be dangerous or even fatal, especially when mixed with edge play."),
 // J
-    ListData("Japanese bondage (Shibari)", "Some people have a kink for these intricate ties, "),
+    ListData("Japanese bondage (Shibari)", "Special japanese kind of estetic bondage."),
     ListData("Jerk off instructions (JOI)", "Being instructed to masturbate."),
 // K
     ListData("Katoptronophilia", "A fetish for having sex in front of mirrors, a fairly common sexual kink."),

@@ -29,6 +29,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.Font
+import com.app.fantasywhisper.AppLang
 import com.app.fantasywhisper.R
 import com.app.fantasywhisper.ui.theme.White
 
@@ -55,6 +56,7 @@ fun TitleText (title: String) {
 
 @Composable
 fun EmptyResult (onEndWhisper: () -> Unit) {
+    val lang = AppLang.current
     Scaffold { padding ->
         Box(
             modifier = Modifier
@@ -70,7 +72,7 @@ fun EmptyResult (onEndWhisper: () -> Unit) {
                     )
                     .padding(6.dp)
             ) {
-                TitleText("Result")
+                TitleText(lang.resTitle)
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -91,7 +93,7 @@ fun EmptyResult (onEndWhisper: () -> Unit) {
                             .padding(12.dp)
                     ) {
                         Text(
-                            text = "It looks like you don't have anything in common, but don't be sad! Try to communicate with your partner and maybe you will find something you both want to try. Or you can try to negotiate a compromise. \nAfter all this app is about communication, so don't be sad about the result and try to find different solution to make your desires come true.\n\n (And also remember: taste can change!)",
+                            text = lang.emptyResult,
                             style = MaterialTheme.typography.bodyLarge,
                             color = Color.White.copy(alpha = 0.9f)
                         )
@@ -106,7 +108,7 @@ fun EmptyResult (onEndWhisper: () -> Unit) {
                         White
                     )
                 ) {
-                    Text("End Whisper", style = MaterialTheme.typography.bodyMedium.copy(
+                    Text(lang.resEnd, style = MaterialTheme.typography.bodyMedium.copy(
                         fontFamily = LobsterFont,
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp
@@ -119,15 +121,16 @@ fun EmptyResult (onEndWhisper: () -> Unit) {
 
 @Composable
 fun ListLink() {
+    val lang = AppLang.current
     val annotatedString = buildAnnotatedString {
         withStyle(style = SpanStyle(color = Color.White, fontSize = 16.sp)) {
-            append("The kinks list was taken from this ")
+            append(lang.disLink)
         }
         // Start of the clickable part
         pushStringAnnotation(tag = "URL", annotation = "https://badgirlsbible.com/list-of-kinks-and-fetishes")
         withStyle(style = SpanStyle(color = Color.White, textDecoration = TextDecoration.Underline)) {
             withStyle(style = SpanStyle(color = Color.White, fontSize = 18.sp, textDecoration = TextDecoration.Underline)) {
-                append("website.")
+                append(lang.disWeb)
             }
         }
         pop()
@@ -147,9 +150,10 @@ fun ListLink() {
 
 @Composable
 fun GitLink() {
+    val lang = AppLang.current
     val annotatedString = buildAnnotatedString {
         withStyle(style = SpanStyle(color = Color.White, fontSize = 16.sp)) {
-            append("Licensed under GNU GPLv3. Available at ")
+            append(lang.disGit)
         }
         // Start of the clickable part
         pushStringAnnotation(tag = "URL", annotation = "https://github.com/S0lved-LynX/Fantasy_Whisper")
