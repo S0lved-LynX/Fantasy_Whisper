@@ -5,11 +5,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
@@ -52,7 +57,7 @@ fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
             val buttonText = if (state == amountOfPeople - 1) lang.buttonResult else lang.buttonNext
 
             key(state) {
-                KinkListScreen(listType, filledWarning, state, buttonText, resultList) { state++ }
+                KinkListScreen(listType, filledWarning, state, buttonText, resultList, onEnd) { state++ }
             }
         } else {
             if (filledWarning.value != Warning.OKAY) {
@@ -65,7 +70,7 @@ fun KinkListCaller(listType: WList, amountOfPeople: Int, onEnd: () -> Unit) {
 }
 
 @Composable
-fun KinkListScreen(source: WList, warning: MutableState<Warning>, personIndex: Int, label: String, result: MutableState<BooleanArray>, onNext: () -> Unit) {
+fun KinkListScreen(source: WList, warning: MutableState<Warning>, personIndex: Int, label: String, result: MutableState<BooleanArray>, onEnd: () -> Unit, onNext: () -> Unit) {
     val lang = AppLang.current
     val sourceList = when (source) {
         WList.ROLEPLAY -> lang.roleplayData
@@ -100,8 +105,27 @@ fun KinkListScreen(source: WList, warning: MutableState<Warning>, personIndex: I
                 .background(MaterialTheme.colorScheme.tertiary),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            TitleText(lang.listTitle(personIndex+1))
+            Box (
+                modifier = Modifier
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                IconButton (
+                    onClick = onEnd,
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    ),
+                    modifier = Modifier.align(Alignment.CenterStart)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = "Close",
+                        tint = Color.White
+                    )
+                }
 
+                TitleText(lang.listTitle(personIndex + 1))
+            }
             // Search bar
             TextField(
                 value = searchQuery,
