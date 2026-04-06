@@ -33,6 +33,7 @@ interface AppStrings {
     val buttonCosplays: String
     val buttonPlaces: String
     val buttonBack: String
+    val optionsInfo: String
 
     // disclaimer
     val disBull1: String
@@ -101,7 +102,7 @@ object EnglishStrings : AppStrings {
     override val menuPointThree = "See ONLY desires that you both have in common."
     override val menuPointFour = "And communicate what to do with the result. \nNow it might be a bit easier, don't you think so?"
     override val menuButton = "Start Whispering"
-    override val menuLangButton = "Change Language"
+    override val menuLangButton = "\uD83C\uDDE8\uD83C\uDDFF Change Language \uD83C\uDDE8\uD83C\uDDFF"
 
     // options
     override val optionsTitle = "Choose a category"
@@ -111,6 +112,7 @@ object EnglishStrings : AppStrings {
     override val buttonCosplays = "Cosplay"
     override val buttonPlaces = "Places"
     override val buttonBack = "Back"
+    override val optionsInfo = "Select your preferences by checking the boxes. Tap any item to see more details."
 
     // disclaimer
     override val disBull1 = "Consent is mandatory. Never use this app to coerce or force anyone into any activity."
@@ -179,7 +181,7 @@ object CzechStrings : AppStrings {
     override val menuPointThree = "Uvidíte POUZE ty touhy, které máte oba společné."
     override val menuPointFour = "A pak už stačí jen probrat, co s výsledkem podniknete. \nTeď už je to o něco snazší, nemyslíš?"
     override val menuButton = "Začít šeptat"
-    override val menuLangButton = "Změnit jazyk"
+    override val menuLangButton = "\uD83C\uDDEC\uD83C\uDDE7 Změnit jazyk \uD83C\uDDEC\uD83C\uDDE7"
 
     // options
     override val optionsTitle = "Vyber si kategorii"
@@ -189,6 +191,8 @@ object CzechStrings : AppStrings {
     override val buttonCosplays = "Převleky"
     override val buttonPlaces = "Místa"
     override val buttonBack = "Zpět"
+    override val optionsInfo = "Vyberte své preference zaškrtnutím políčka. Kliknutím na název zobrazíte popis."
+
 
     // disclaimer
     override val disBull1 = "Souhlas je povinný. Nikdy tuto aplikaci nepoužívej k nátlaku nebo nucení kohokoli k jakékoli aktivitě."

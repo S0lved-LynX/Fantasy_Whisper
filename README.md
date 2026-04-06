@@ -11,19 +11,16 @@ You have 2 installation options:
 
 ## Usage 
 
-> TODO: Update for multiple people
-
 After starting the app you can decide which type of fantasies you want to share with your partner/friend or whoever you are with at the moment. There are a few categories that you can choose from:
 
 1. Kinks
 2. Places
 3. Roleplay
 4. Cosplay
-5. Custom
 
 Then one of you fills in his fantasies into the form and clicks **Proceed to next member**. The screen will change for the second participant to fill in the needs and then the participant clicks **See results**. Then both users will be able to see items (kinks) that they have in common. After clicking **End whisper** results will be securely deleted and the form needs to be filled in again. 
 
-When choosing items the user can click the box to see short description.
+When choosing items the user can click the box to see short description of item.
 
 ## Promises
 
@@ -37,11 +34,6 @@ And please be aware that **I can make a coding mistake** that will make the app 
 
 
 ### Feedback from first release
-- secure it with rate of filled in list
-- more people not only partners can use it
-- store results
-- add more
-- CZ
+- secure MASTG
 - cli
-- custom sets
-- search bar
+- places descriptions

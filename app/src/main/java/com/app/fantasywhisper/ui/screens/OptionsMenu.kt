@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -91,17 +92,28 @@ fun WhisperChooseScreen(onBack: () -> Unit) {
                 WhisperOptionsButton(lang.buttonRoleplays, Modifier.weight(1f)) { screen = "roleplaycaller" }
                 WhisperOptionsButton(lang.buttonPlaces  , Modifier.weight(1f)) { screen = "placescaller" }
             }
+
         }
 
         BackHandler(enabled = true) { onBack() }
-        Button(
-            onClick = onBack,
-            modifier = Modifier.align(Alignment.BottomStart)
+        Row (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .align(AbsoluteAlignment.BottomLeft),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(lang.buttonBack)
+            Button(onClick = onBack) {
+                Text(lang.buttonBack)
+            }
+            Text(
+                text = lang.optionsInfo,
+                color = Color.White,
+                modifier = Modifier.weight(1f)
+            )
+
         }
-
-
     }
 
     // Change screen when button is clicked

@@ -1,5 +1,6 @@
 package com.app.fantasywhisper.ui.components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -49,6 +50,7 @@ fun MenuLangButton(
             containerColor = Rose,
             contentColor = Color.White
         ),
+        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp),
         elevation = ButtonDefaults.elevatedButtonElevation(
             defaultElevation = 24.dp,
             pressedElevation = 6.dp
